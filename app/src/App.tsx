@@ -6,6 +6,7 @@ import {
 import './App.css';
 import { Home } from './views/home';
 import { FoodCatalog } from './views/catalog';
+import { TopBar } from './components/topBar';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />   
+    <div>
+      <TopBar />
+      <RouterProvider router={router} />   
+
+    </div>
   );
 }
 
