@@ -1,5 +1,6 @@
-import { RestClient } from "../rest/types";
-import { FoodProvider } from "./types";
+import { RestClient } from "../../rest/types";
+import { FoodProvider } from "../types";
+import { EdamanParseResponse } from "./types";
 
 export class EdamanProvider implements FoodProvider {
     private restClient: RestClient
@@ -12,7 +13,7 @@ export class EdamanProvider implements FoodProvider {
     constructor(restClient: RestClient) {
         this.restClient = restClient
     }
-    searchFoodByName =  async (search: string): Promise<any> => {
+    searchFoodByName =  async (search: string): Promise<EdamanParseResponse> => {
         return await this.restClient.get(`https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser?ingr=${search}&category%5B0%5D=generic-foods&health%5B0%5D=alcohol-free`, this.options)
     };
 }
