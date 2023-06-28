@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import { Home } from './views/home';
-import { FoodCatalog } from './views/catalog';
+import { FoodCatalog } from './modules/catalog/view';
 import { TopBar } from './components/topBar';
 
 const router = createBrowserRouter([
