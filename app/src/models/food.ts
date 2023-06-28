@@ -1,7 +1,9 @@
 export class Food {
-    label: string
-    constructor(label: string) {
+    label: string;
+    image: string;
+    constructor(label: string, image: string = '') {
         this.label = label;
+        this.image = image;
     }
     
     public toString() {

@@ -19,7 +19,7 @@ export const useCatalog = () => {
 
         const response = await fetch(url, options).then(response => response.json());
         console.warn(response)
-        dispatch(provideFoodList(response.hints.map((e: any) => new Food(e.food.label))))
+        dispatch(provideFoodList(response.hints.map((e: any) => new Food(e.food.label, e.food.image))))
     }
 
 
