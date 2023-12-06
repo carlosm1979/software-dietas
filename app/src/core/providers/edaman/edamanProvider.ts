@@ -6,7 +6,7 @@ export class EdamanProvider implements FoodProvider {
     private restClient: RestClient
     private options: any = {
         headers: {
-            'X-RapidAPI-Key': '8a89367b8fmsh36406ab580100adp11d6acjsn1435fd517bea',
+            'X-RapidAPI-Key': process.env.EDAMAN_KEY,
             'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
         }
     }
