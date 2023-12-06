@@ -26,10 +26,13 @@ jobs:
       # Runs a single command using the runners shell
       - name: jest
         working-directory: ./webapp
-        run: npm run jest
+        run: |
+          npm install
+          npm run jest
 
       # Runs a set of commands using the runners shell
       - name: cypress
         working-directory: ./webapp
         run: |
+          npm install
           npm run cy:run
