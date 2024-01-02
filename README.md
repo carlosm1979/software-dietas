@@ -46,6 +46,5 @@ Edamam Food and Grocery Database
 https://rapidapi.com/edamam/api/edamam-food-and-grocery-database
 
 
-# External services info
-
-https://drive.google.com/drive/folders/1n9hA5v8WWR0jLvw_nRdkyAdsRT35IqrL?usp=sharing
+## MongoDB
+https://cloud.mongodb.com/
