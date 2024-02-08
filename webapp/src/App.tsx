@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { SearchPage } from './pages/search';
 import { Layout } from './Layout ';
 
-const router = createBrowserRouter([
+export const routesConfig = [
   {
     path: "/",
     element: <Layout />,
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
       },
     ]
   },
-
-]);
+];
+const router = createBrowserRouter(routesConfig);
 
 
 function App() {
