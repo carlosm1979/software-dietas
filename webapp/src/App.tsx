@@ -21,7 +21,7 @@ export const routesConfig = [
     ]
   },
 ];
-const router = createBrowserRouter(routesConfig, {basename: '/software-dietas'});
+const router = createBrowserRouter(routesConfig, {basename: process.env.REACT_APP_BASE_URL});
 
 
 function App() {
