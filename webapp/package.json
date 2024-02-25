@@ -58,5 +58,5 @@
     "react-test-renderer": "^18.2.0",
     "ts-jest": "^27.1.5"
   },
-  "homepage": "software-dietas/"
+  "homepage": "/software-dietas/"
 }
