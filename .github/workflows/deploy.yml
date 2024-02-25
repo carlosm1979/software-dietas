@@ -32,7 +32,7 @@ jobs:
         npm run jest
         npm run cy:run
 
-    - name: Archive artifact
+    - name: Archive artifact Linux
       shell: sh
       if: runner.os == 'Linux'
       run: |
@@ -48,7 +48,7 @@ jobs:
       env:
         INPUT_PATH: "./webapp/build"
 
-    - name: Archive artifact
+    - name: Archive artifact macOS
       shell: sh
       if: runner.os == 'macOS'
       run: |
@@ -64,7 +64,7 @@ jobs:
       env:
         INPUT_PATH: "./webapp/build"
  
-    - name: Archive artifact
+    - name: Archive artifact Windows
       shell: bash
       if: runner.os == 'Windows'
       run: |
