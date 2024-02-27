@@ -17,13 +17,13 @@ describe ('search store', () => {
     it('Given app loadeed When search Then call conroller', () => {       
         const store = buildStore();
 
-        store.dispatch(makeSearch());
+        store.dispatch(makeSearch('anySearchValues'));
         const mockEdamanController = EdamanController.mock.instances[0];
         const mockSearch = mockEdamanController.search;
 
         expect(store.getState().search.loading).toBe(true);
         expect(store.getState().search.error).toBe(null);
-        expect(mockSearch).toHaveBeenCalled()
+        expect(mockSearch).toHaveBeenCalledWith('anySearchValues')
     })
 
     it('Given app loadeed When controller call returns succes Then update items', () => {       

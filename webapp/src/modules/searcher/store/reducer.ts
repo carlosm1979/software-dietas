@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import EdamanController from '../../../core/controllers/edaman/edamanController';
 
-export const makeSearch = createAsyncThunk('search/makeSearch', async () => {
+export const makeSearch = createAsyncThunk('search/makeSearch', async (searchValue: string) => {
   try {
-    const response = await new EdamanController().search()
+    const response = await new EdamanController().search(searchValue)
     return response.items
   
   }catch(e) {

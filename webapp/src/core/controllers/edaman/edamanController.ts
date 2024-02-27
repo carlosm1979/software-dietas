@@ -1,6 +1,6 @@
 export default class EdamanController {
 
-    search(): any {
+    search(value: string): any {
         return false
     }
     
