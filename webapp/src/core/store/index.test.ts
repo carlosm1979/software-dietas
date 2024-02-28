@@ -2,6 +2,7 @@ import { buildStore } from ".";
 import { makeSearch } from "../../modules/searcher/store/reducer";
 import EdamanController from "../controllers/edaman/edamanController";
 jest.mock('../controllers/edaman/edamanController');
+const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
 
 describe ('search store', () => {
@@ -15,18 +16,22 @@ describe ('search store', () => {
 
 
     it('Given app loadeed When search Then call conroller', () => {       
+        const mockSearch = jest.fn(() => Promise.resolve({items: []}))
+        MockedEdamanController.mockImplementation(() => {
+            return {
+              search: mockSearch,
+            };
+          });
         const store = buildStore();
 
         store.dispatch(makeSearch('anySearchValues'));
-        const mockEdamanController = EdamanController.mock.instances[0];
-        const mockSearch = mockEdamanController.search;
 
         expect(store.getState().search.loading).toBe(true);
         expect(store.getState().search.error).toBe(null);
         expect(mockSearch).toHaveBeenCalledWith('anySearchValues')
     })
 
-    it('Given app loadeed When controller call returns succes Then update items', () => {       
+    it('Given app loadeed When search/makeSearch/fulfilled Then update items', () => {       
         const store = buildStore();
 
         store.dispatch({type: 'search/makeSearch/fulfilled', payload: {items: [{id: '1', description: 'anyDescription'}]}});
@@ -35,7 +40,7 @@ describe ('search store', () => {
         expect(store.getState().search.items).toEqual([{id: '1', description: 'anyDescription'}]);
     })
 
-    it('Given app loadeed When controller call returns error Then update items', () => {       
+    it('Given app loadeed When search/makeSearch/rejected Then update items', () => {       
         const store = buildStore();
 
         store.dispatch({type: 'search/makeSearch/rejected', payload: {message: 'errorMessage'}});

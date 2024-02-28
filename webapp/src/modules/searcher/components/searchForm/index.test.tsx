@@ -1,64 +1,40 @@
-import React, { PropsWithChildren } from 'react'
-import { render, RenderOptions } from '@testing-library/react';
+import React from 'react'
+import { screen } from '@testing-library/react';
 import { SearchForm } from '.';
-import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
-import { AppStore, RootState, buildStore } from '../../../../core/store';
 
-import { http, HttpResponse, delay } from 'msw';
+import EdamanController from '../../../../core/controllers/edaman/edamanController';
+import { renderWithProviders } from '../../../../test-utils/render';
+jest.mock('../../../../core/controllers/edaman/edamanController');
+const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
-import { setupServer } from 'msw/node';
+describe('Search form component', () => {
 
-// This type interface extends the default options for render from RTL, as well
-// as allows the user to specify other things such as initialState, store.
-interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: Partial<RootState>
-  store?: AppStore
-}
-
-export function renderWithProviders(
-  ui: React.ReactElement,
-  {
-    preloadedState = {},
-    // Automatically create a store instance if no store was passed in
-    store = buildStore(preloadedState),
-    ...renderOptions
-  }: ExtendedRenderOptions = {}
-) {
-  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>
-  }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
-}
-
-
-export const handlers = [
-  http.get('/api/search', async () => {
-    await delay(150)
-    return HttpResponse.json({items:  [{id: '1', description: 'any'}]})
-  })
-]
-
-const server = setupServer(...handlers)
-
-
-describe('search form', () => {
-  beforeAll(() => server.listen())
-
-// Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers())
-
-// Disable API mocking after the tests are done.
-afterAll(() => server.close())
+  beforeEach(() => {
+    MockedEdamanController.mockImplementation(() => {
+      return {
+        search: () => {
+          return Promise.resolve({items: [{id: '1', description: 'anyDescription'}]})
+        },
+      };
+    });
+  });
 
 
     it('Given search form loaded When type and accept Then search term',async  () => {
-          const {getByLabelText, getByRole, findByText} = renderWithProviders(<SearchForm />)
+          renderWithProviders(<SearchForm />, {
+            preloadedState: {
+              search: {
+                loading: false,
+                items: [],
+                error: null,  
+              },
+            }
+          })
 
-          userEvent.type(getByLabelText('search'))
-          userEvent.click(getByRole('button'))
+          userEvent.type(screen.getByLabelText('search'), 'irrelevant')
+          userEvent.click(screen.getByRole('button'))
 
-
-          expect(await findByText('any')).toBeInTheDocument()      
+          expect(await screen.findByText('anyDescription')).toBeInTheDocument()      
     })
 })

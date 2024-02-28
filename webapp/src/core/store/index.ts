@@ -6,7 +6,8 @@ const rootReducer = combineReducers({
 })
 
 export const buildStore = (preloadedState?: Partial<any>) =>  configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  preloadedState
 })
 
 export type RootState = ReturnType<typeof rootReducer>

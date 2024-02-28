@@ -4,7 +4,7 @@ import EdamanController from '../../../core/controllers/edaman/edamanController'
 export const makeSearch = createAsyncThunk('search/makeSearch', async (searchValue: string) => {
   try {
     const response = await new EdamanController().search(searchValue)
-    return response.items
+    return {items: response.items}
   
   }catch(e) {
     return e
@@ -26,7 +26,7 @@ const searchSlide = createSlice({
       .addCase(makeSearch.pending, (state, action) => {
         state.loading = true
       })
-      .addCase(makeSearch.fulfilled, (state, action) => {
+      .addCase(makeSearch.fulfilled, (state, action: any) => {
         state.items = action.payload.items
         state.loading = false
       })

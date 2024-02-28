@@ -1,3 +1,9 @@
+import { SearchForm } from "../../components/searchForm"
+
 export const SearchPage = () => {
-    return (<div>search page</div>)
+    return (<>
+    
+    <h2>Search</h2>
+    <SearchForm />
+    </>)
 }
