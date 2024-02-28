@@ -6,28 +6,28 @@ import { SearchPage } from './modules/searcher/pages/search';
 import { Layout } from './Layout ';
 
 export const routesConfig = [
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "search",
-        element: <SearchPage />,
-      },
-    ]
-  },
+	{
+		path: '/',
+		element: <Layout />,
+		children: [
+			{
+      index: true,
+				element: <Dashboard />,
+			},
+			{
+				path: 'search',
+				element: <SearchPage />,
+			},
+		]
+	},
 ];
 const router = createBrowserRouter(routesConfig, {basename: process.env.REACT_APP_BASE_URL});
 
 
 function App() {
-  return (
-    <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
-  );
+	return (
+		<RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+	);
 }
 
 export default App;
