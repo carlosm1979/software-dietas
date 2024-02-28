@@ -1,10 +1,14 @@
 import { FC } from "react"
 
-export const Input: FC<{onChange: (value: string) => void; }> = ({onChange}) => {
+interface IInuptComponent {
+    onChange: (value: string) => void;
+    placeholder?: string;
+}
+
+export const Input: FC<IInuptComponent> = ({onChange, placeholder = ''}) => {
 
     return (<>
-    <label htmlFor="sd-input">search</label>
-    <input id="sd-input" type="text" onChange={(e) => {
+    <input id="sd-input" type="text" placeholder={placeholder} onChange={(e) => {
         onChange(e.currentTarget.value)
     }} ></input></>)
 }

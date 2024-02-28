@@ -13,8 +13,8 @@ export const SearchForm = ( ) => {
     });
 
     return (<div>
-        <Input onChange={(value) => setSearch(value)} />
-        <Button onClick={() => {
+        <Input placeholder="search" onChange={(value) => setSearch(value)} />
+        <Button label="Search" onClick={() => {
             dispatch(makeSearch(search) as any)
         }} />
         {items.map((i: any) => (<div key={i.id}>{i.description}</div>))}

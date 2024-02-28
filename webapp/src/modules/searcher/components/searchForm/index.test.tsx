@@ -32,8 +32,8 @@ describe('Search form component', () => {
             }
           })
 
-          userEvent.type(screen.getByLabelText('search'), 'irrelevant')
-          userEvent.click(screen.getByRole('button'))
+          userEvent.type(screen.getByPlaceholderText('search'), 'irrelevant')
+          userEvent.click(screen.getByRole('button', {name: 'Search'}))
 
           expect(await screen.findByText('anyDescription')).toBeInTheDocument()      
     })

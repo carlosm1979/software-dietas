@@ -1,5 +1,10 @@
 import { FC } from "react"
 
-export const Button: FC<{onClick: () => void}> = ({onClick}) => {
-    return (<button onClick={() => {onClick()}} />)
+interface IButtonComponent {
+    onClick: () => void;
+    label: string;
+}
+
+export const Button: FC<IButtonComponent> = ({onClick, label}) => {
+    return (<button onClick={() => {onClick()}} >{label}</button>)
 }
