@@ -1,6 +1,8 @@
 import { buildStore } from ".";
 import { makeSearch } from "../../modules/searcher/store/reducer";
+import { mockRest } from "../../test-utils/mockRest";
 import EdamanController from "../controllers/edaman/edamanController";
+import { AxiosRestClient } from "../rest-client/axios";
 jest.mock('../controllers/edaman/edamanController');
 const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
@@ -17,11 +19,15 @@ describe ('search store', () => {
 
     it('Given app loaded When search Then call controller', () => {       
         const mockSearch = jest.fn(() => Promise.resolve({items: []}))
-        MockedEdamanController.mockImplementation(() => {
+
+        jest.mock('../controllers/edaman/edamanController', () => {
             return {
-              search: mockSearch,
+                __esModule: true,
+                default: jest.fn().mockImplementation(() => ({
+                    search: mockSearch,
+                })),
             };
-          });
+        });
         const store = buildStore();
 
         store.dispatch(makeSearch('anySearchValues'));

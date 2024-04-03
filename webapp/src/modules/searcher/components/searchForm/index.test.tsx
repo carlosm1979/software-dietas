@@ -11,13 +11,16 @@ const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 describe('Search form component', () => {
 
   beforeEach(() => {
-    MockedEdamanController.mockImplementation(() => {
+    jest.mock('../../../../core/controllers/edaman/edamanController', () => {
       return {
-        search: () => {
-          return Promise.resolve({items: [{id: '1', description: 'anyDescription'}]})
-        },
+          __esModule: true,
+          default: jest.fn().mockImplementation(() => ({
+              search: () => {
+                return Promise.resolve({items: [{id: '1', description: 'anyDescription'}]})
+              },
+          })),
       };
-    });
+  });
   });
 
 

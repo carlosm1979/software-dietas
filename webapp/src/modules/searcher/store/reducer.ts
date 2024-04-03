@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import EdamanController from '../../../core/controllers/edaman/edamanController';
+import { AxiosRestClient } from '../../../core/rest-client/axios';
 
 export const makeSearch = createAsyncThunk('search/makeSearch', async (searchValue: string) => {
   try {
-    const response = await new EdamanController().search(searchValue)
-    return {items: response.items}
+    const response = await new EdamanController(new AxiosRestClient()).search(searchValue)
+    return {items: response}
   
   }catch(e) {
     return e
