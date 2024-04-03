@@ -15,7 +15,7 @@ describe ('search store', () => {
     })
 
 
-    it('Given app loadeed When search Then call conroller', () => {       
+    it('Given app loaded When search Then call controller', () => {       
         const mockSearch = jest.fn(() => Promise.resolve({items: []}))
         MockedEdamanController.mockImplementation(() => {
             return {
@@ -31,7 +31,7 @@ describe ('search store', () => {
         expect(mockSearch).toHaveBeenCalledWith('anySearchValues')
     })
 
-    it('Given app loadeed When search/makeSearch/fulfilled Then update items', () => {       
+    it('Given app loaded When search/makeSearch/fulfilled Then update items', () => {       
         const store = buildStore();
 
         store.dispatch({type: 'search/makeSearch/fulfilled', payload: {items: [{id: '1', description: 'anyDescription'}]}});
@@ -40,7 +40,7 @@ describe ('search store', () => {
         expect(store.getState().search.items).toEqual([{id: '1', description: 'anyDescription'}]);
     })
 
-    it('Given app loadeed When search/makeSearch/rejected Then update items', () => {       
+    it('Given app loaded When search/makeSearch/rejected Then update items', () => {       
         const store = buildStore();
 
         store.dispatch({type: 'search/makeSearch/rejected', payload: {message: 'errorMessage'}});
