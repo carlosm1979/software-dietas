@@ -18,6 +18,6 @@ export const SearchForm = ( ) => {
         <Button label="Search" onClick={() => {
             dispatch(makeSearch(search) as any)
         }} />
-        {items.map((i: any) => (<div key={i.id}>{i.description}</div>))}
+        {items && items.map((i: any) => (<div key={i.id}>{i.description}</div>))}
     </div>)
 }

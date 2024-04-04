@@ -7,11 +7,7 @@ export class AxiosRestClient implements RestClient {
         const options = {
             method: 'GET',
             url: 'https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser',
-            params,
-            headers: {
-              'X-RapidAPI-Key': process.env.REACT_APP_EDAMAM_KEY,
-              'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
-            }
+            ...params,
           };
 
         return axios.request(options)
