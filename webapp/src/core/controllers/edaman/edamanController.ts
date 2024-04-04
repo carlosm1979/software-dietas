@@ -2,6 +2,17 @@ import { Food } from "../../../modules/searcher/models/food";
 import { mockRest } from "../../../test-utils/mockRest";
 import { RestClient } from "../../rest-client/types";
 
+
+interface EdemamSearchResponse {
+    hints: Array<{
+        food: {
+            label: string;
+            foodId: string;
+        };
+    }>;
+}
+
+
 export default class EdamanController {
     private restClient: RestClient
 
@@ -18,14 +29,9 @@ export default class EdamanController {
             'nutrition-type': 'cooking',
             'category[0]': 'generic-foods',
             'health[0]': 'alcohol-free'
-          }).then((response: {hints: Array<{
-            food:{
-                label: string,
-                foodId: string
-            }
-          }>} ) => {
+          }).then((response: {data: EdemamSearchResponse} ) => {
 
-            return response.hints.map((i) => {
+            return response.data.hints.map((i) => {
                 return new Food({
                     id: i.food.foodId,
                     description: i.food.label,
