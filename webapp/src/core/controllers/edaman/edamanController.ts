@@ -24,12 +24,17 @@ export default class EdamanController {
     search(value: string): Promise<Food[]> {
         
         return this.restClient.get('https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser', 
-        {
+        {params: {
             ingr: value,
             'nutrition-type': 'cooking',
             'category[0]': 'generic-foods',
             'health[0]': 'alcohol-free'
-          }).then((response: {data: EdemamSearchResponse} ) => {
+          },
+            headers: {
+                'X-RapidAPI-Key': process.env.REACT_APP_EDAMAM_KEY,
+                'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
+              }}
+        ).then((response: {data: EdemamSearchResponse} ) => {
 
             return response.data.hints.map((i) => {
                 return new Food({
