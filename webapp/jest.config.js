@@ -13,5 +13,6 @@ module.exports = {
       },
     },
     setupFilesAfterEnv: ['./src/setupTests.ts'],
+    transformIgnorePatterns: ["/node_modules/(?!(@bundled-es-modules)/)"],
   };
   

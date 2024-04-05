@@ -1,4 +1,4 @@
-import { IFood } from "./tyoes";
+import { IFood } from "./types";
 
 export class Food implements IFood {
     constructor(data: IFood) {
