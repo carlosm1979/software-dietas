@@ -1,3 +1,3 @@
 export interface RestClient {
-    get: (url: string, params: any) => Promise<any>
+    get: (url: string, params?: any, headers?: any) => Promise<any>
 }
