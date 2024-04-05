@@ -1,8 +1,8 @@
 import { buildStore } from ".";
 import { makeSearch } from "../../modules/searcher/store/reducer";
+import { mockRest } from "../../test-utils/mockRest";
 import EdamanController from "../controllers/edaman/edamanController";
 jest.mock('../controllers/edaman/edamanController');
-const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
 
 describe ('search store', () => {

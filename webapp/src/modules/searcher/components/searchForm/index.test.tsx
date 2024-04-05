@@ -6,7 +6,6 @@ import userEvent from '@testing-library/user-event';
 import EdamanController from '../../../../core/controllers/edaman/edamanController';
 import { renderWithProviders } from '../../../../test-utils/render';
 jest.mock('../../../../core/controllers/edaman/edamanController');
-const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
 describe('Search form component', () => {
 
@@ -16,7 +15,7 @@ describe('Search form component', () => {
           __esModule: true,
           default: jest.fn().mockImplementation(() => ({
               search: () => {
-                return Promise.resolve({items: [{id: '1', description: 'anyDescription'}]})
+                return Promise.resolve([{id: '1', description: 'anyDescription'}])
               },
           })),
       };

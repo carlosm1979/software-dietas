@@ -22,21 +22,15 @@ export default class EdamanController {
 
 
     search(value: string): Promise<Food[]> {
-        
+        const url = `https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser?ingr=${value}`;
+
         return this.restClient.get(
-            'https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser', 
-            {
-                ingr: value,
-                'nutrition-type': 'cooking',
-                'category[0]': 'generic-foods',
-                'health[0]': 'alcohol-free'
-              }, 
+            url, 
               {
                 'X-RapidAPI-Key': process.env.REACT_APP_EDAMAM_KEY,
                 'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
               }
         )
-        .then((r) => r.json())
         .then((response: EdemamSearchResponse ) => {
 
             return response.hints.map((i) => {
