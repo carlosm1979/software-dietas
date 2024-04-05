@@ -1,5 +1,6 @@
 import { Food } from "../../../modules/searcher/models/food";
 import { mockRest } from "../../../test-utils/mockRest";
+import { FetchRestClient } from "../../rest-client/fetch";
 import { RestClient } from "../../rest-client/types";
 
 
@@ -14,17 +15,18 @@ interface EdemamSearchResponse {
 
 
 export default class EdamanController {
-    private restClient: RestClient
 
-    constructor(restClient: RestClient) {
-        this.restClient = restClient
+
+
+    restClient() {
+        return new FetchRestClient()
     }
 
 
     search(value: string): Promise<Food[]> {
         const url = `https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser?ingr=${value}`;
 
-        return this.restClient.get(
+        return this.restClient().get(
             url, 
               {
                 'X-RapidAPI-Key': process.env.REACT_APP_EDAMAM_KEY,

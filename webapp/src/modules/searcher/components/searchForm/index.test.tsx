@@ -5,21 +5,22 @@ import userEvent from '@testing-library/user-event';
 
 import EdamanController from '../../../../core/controllers/edaman/edamanController';
 import { renderWithProviders } from '../../../../test-utils/render';
+import { FetchRestClient } from '../../../../core/rest-client/fetch';
+import { Food } from '../../models/food';
 jest.mock('../../../../core/controllers/edaman/edamanController');
+const MockedEdamanController = EdamanController as jest.Mock<EdamanController>;
 
 describe('Search form component', () => {
 
   beforeEach(() => {
-    jest.mock('../../../../core/controllers/edaman/edamanController', () => {
+    MockedEdamanController.mockImplementation(() => {
       return {
-          __esModule: true,
-          default: jest.fn().mockImplementation(() => ({
-              search: () => {
-                return Promise.resolve([{id: '1', description: 'anyDescription'}])
-              },
-          })),
+        search: () => {
+          return Promise.resolve([new Food({id: '1', description: 'anyDescription', fat: 0, fiber: 0, kcal: 0, netCarbohydrates:0 }) ])
+        },
+        restClient: () => new FetchRestClient()
       };
-  });
+    });
   });
 
 
